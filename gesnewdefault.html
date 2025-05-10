@@ -13,10 +13,26 @@
       margin: 0 auto;
       border: 2px solid #000;
     }
+    #gameOver {
+      display: none;
+      text-align: center;
+      position: absolute;
+      top: 40%;
+      left: 0;
+      right: 0;
+      font-family: Arial;
+    }
   </style>
 </head>
 <body>
   <canvas id="gameCanvas" width="320" height="480"></canvas>
+
+  <div id="gameOver">
+    <h1>Game Over</h1>
+    <p>Scorul tău: <span id="finalScore">0</span></p>
+    <button onclick="restartGame()">Reîncearcă</button>
+  </div>
+
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
@@ -64,8 +80,7 @@
           bird.x + bird.width > pipes[i].x &&
           (bird.y < pipes[i].top || bird.y + bird.height > pipes[i].bottom)
         ) {
-         
-          document.location.reload();
+          endGame();
         }
 
         if (pipes[i].x + pipes[i].width === bird.x) {
@@ -76,8 +91,7 @@
       pipes = pipes.filter(pipe => pipe.x + pipe.width > 0);
 
       if (bird.y + bird.height > canvas.height || bird.y < 0) {
-        
-        document.location.reload();
+        endGame();
       }
     }
 
@@ -94,13 +108,33 @@
       update();
       draw();
       frame++;
-      requestAnimationFrame(loop);
+      loopId = requestAnimationFrame(loop);
     }
 
-    document.addEventListener("keydown", () => {
+    function keyDownHandler() {
       bird.velocity = lift;
-    });
+    }
 
+    function endGame() {
+      document.getElementById("finalScore").innerText = score;
+      document.getElementById("gameOver").style.display = "block";
+      cancelAnimationFrame(loopId);
+      document.removeEventListener("keydown", keyDownHandler);
+    }
+
+    function restartGame() {
+      bird = { x: 50, y: 150, width: 20, height: 20, velocity: 0 };
+      pipes = [];
+      score = 0;
+      frame = 0;
+      document.getElementById("gameOver").style.display = "none";
+      loop();
+      document.addEventListener("keydown", keyDownHandler);
+    }
+
+    document.addEventListener("keydown", keyDownHandler);
+
+    let loopId;
     loop();
   </script>
 </body>
