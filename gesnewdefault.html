@@ -38,11 +38,12 @@
     const ctx = canvas.getContext("2d");
 
     let bird = { x: 50, y: 150, width: 20, height: 20, velocity: 0 };
-    let gravity = 0.6;
+    let gravity = 0.3;  // Mai mic pentru o mișcare mai lentă a păsării
     let lift = -10;
     let pipes = [];
     let score = 0;
     let frame = 0;
+    let pipeSpeed = 1;  // Mai mic pentru o mișcare mai lentă a țevilor
 
     function drawBird() {
       ctx.fillStyle = "yellow";
@@ -73,7 +74,7 @@
       }
 
       for (let i = 0; i < pipes.length; i++) {
-        pipes[i].x -= 2;
+        pipes[i].x -= pipeSpeed;  // Viteza mai lentă a țevilor
 
         if (
           bird.x < pipes[i].x + pipes[i].width &&
