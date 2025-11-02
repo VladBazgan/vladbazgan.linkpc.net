@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zâmbetul Zilei 😸</title>
+<style>
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #0d1b2a, #1b263b);
+    color: #f1faee;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+  }
+  #msg {
+    font-size: 1.5em;
+    max-width: 500px;
+    padding: 20px;
+    border: 2px solid #a8dadc;
+    border-radius: 12px;
+    background-color: rgba(255,255,255,0.05);
+    box-shadow: 0 0 10px #457b9d;
+  }
+</style>
+</head>
+<body>
+  <div id="msg"></div>
+  <script>
+    const mesaje = [
+      "Fiecare linie de cod e o mică victorie! 💻",
+      "Zeus sigur te-ar ajuta azi, dacă nu dormea. 🐾",
+      "Greșelile nu sunt erori — sunt testele universului. ⚙️",
+      "Ai mai mult potențial decât crezi. 🚀",
+      "Un IT-ist mic face lucruri MARI! 🌟"
+    ];
+    const azi = new Date().getDate() % mesaje.length;
+    document.getElementById("msg").textContent = mesaje[azi];
+  </script>
+</body>
+</html>
