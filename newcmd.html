@@ -33,10 +33,11 @@
       "Fiecare linie de cod e o mică victorie! 💻",
       "Zeus sigur te-ar ajuta azi, dacă nu dormea. 🐾",
       "Greșelile nu sunt erori — sunt testele universului. ⚙️",
+      "MIAU",
       "Ai mai mult potențial decât crezi. 🚀",
       "Un IT-ist mic face lucruri MARI! 🌟"
     ];
-    const azi = new Date().getDate() % mesaje.length;
+    const azi = Math.floor(Math.random() * mesaje.length);
     document.getElementById("msg").textContent = mesaje[azi];
   </script>
 </body>
